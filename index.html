@@ -36,7 +36,11 @@ input,select,textarea{font-family:inherit}
 @keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes popIn{0%{transform:scale(.9);opacity:0}100%{transform:scale(1);opacity:1}}
 @keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes floatSoft{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(1deg)}}
 @keyframes pulseR{0%,100%{box-shadow:0 0 0 0 rgba(32,185,87,.3)}50%{box-shadow:0 0 0 8px rgba(32,185,87,0)}}
+@keyframes shimmer{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.reveal{opacity:0;transform:translateY(18px) scale(.98);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
+.reveal.visible{opacity:1;transform:translateY(0) scale(1)}
 .cd{background:var(--w);border-radius:var(--rx);padding:24px;box-shadow:var(--ss);transition:var(--tr)}
 .cd:hover{box-shadow:var(--sm);transform:translateY(-2px)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border-radius:var(--rd);font-weight:600;font-size:.92rem;transition:var(--tr);position:relative;overflow:hidden}
@@ -57,7 +61,8 @@ input,select,textarea{font-family:inherit}
 .fi:focus{outline:none;border-color:var(--br);box-shadow:0 0 0 4px rgba(32,185,87,.15)}
 .fi::placeholder{color:var(--g3)}
 .hero{padding:40px 0 30px;text-align:center}
-.hero-mascot{width:110px;height:110px;margin:0 auto 20px;animation:floatA 3s ease-in-out infinite}
+.hero-mascot{width:110px;height:110px;margin:0 auto 20px;position:relative;animation:floatA 3s ease-in-out infinite}
+.hero-mascot::before{content:'';position:absolute;inset:-12px;border-radius:50%;background:radial-gradient(circle,rgba(32,185,87,.18),rgba(32,185,87,0) 60%);z-index:-1;animation:floatSoft 4s ease-in-out infinite}
 .hero h1{font-size:1.8rem;font-weight:800;color:var(--dk);margin-bottom:10px;line-height:1.2}
 .hero p{font-size:1rem;color:var(--tl);max-width:460px;margin:0 auto 28px}
 .hero-buttons{display:flex;flex-direction:column;gap:10px;align-items:center}
@@ -65,8 +70,9 @@ input,select,textarea{font-family:inherit}
 .dh{margin-bottom:20px}
 .dh h2{font-size:1.3rem;font-weight:700;margin-bottom:4px}
 .dh p{color:var(--tl);font-size:.9rem}
-.bc{background:linear-gradient(135deg,var(--dk),var(--pr));color:var(--w);border-radius:var(--rx);padding:26px;margin-bottom:20px;position:relative;overflow:hidden}
-.bc::after{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:rgba(255,255,255,.08);border-radius:50%}
+.bc{background:linear-gradient(135deg,var(--dk),var(--pr));color:var(--w);border-radius:var(--rx);padding:26px;margin-bottom:20px;position:relative;overflow:hidden;box-shadow:var(--sl)}
+.bc::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.12) 48%,transparent 100%);transform:translateX(-120%);animation:shimmer 3.4s ease-in-out infinite}
+.bc::after{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:rgba(255,255,255,.08);border-radius:50%;animation:floatSoft 4.2s ease-in-out infinite}
 .bc .lb{font-size:.82rem;opacity:.85;margin-bottom:4px}
 .bc .am{font-size:1.9rem;font-weight:800;margin-bottom:6px}
 .bc .sb{font-size:.78rem;opacity:.75;display:flex;align-items:center;gap:4px}
@@ -272,24 +278,24 @@ Profil
 <h2>Selamat datang kembali, Nayla! 👋</h2>
 <p>Yuk, ubah jelantah jadi manfaat.</p>
 </div>
-<div class="bc">
+<div class="bc reveal">
 <div class="lb">Poin Jelantara</div>
 <div class="am" id="dash-points">2.450 poin</div>
 <div class="sb">✨ +120 poin dari setoran terakhir</div>
 </div>
 <div class="sg">
-<div class="sc"><div class="si">🛢️</div><div class="sv" id="stat-oil">24,5 L</div><div class="sl">Jelantah Disetor</div></div>
-<div class="sc"><div class="si">📋</div><div class="sv" id="stat-tx">6</div><div class="sl">Transaksi</div></div>
-<div class="sc"><div class="si">⭐</div><div class="sv" id="stat-pts">2.450</div><div class="sl">Total Poin</div></div>
-<div class="sc"><div class="si">🌱</div><div class="sv" id="stat-impact">24,5 L</div><div class="sl">Tersalurkan</div></div>
+<div class="sc reveal"><div class="si">🛢️</div><div class="sv" id="stat-oil">24,5 L</div><div class="sl">Jelantah Disetor</div></div>
+<div class="sc reveal"><div class="si">📋</div><div class="sv" id="stat-tx">6</div><div class="sl">Transaksi</div></div>
+<div class="sc reveal"><div class="si">⭐</div><div class="sv" id="stat-pts">2.450</div><div class="sl">Total Poin</div></div>
+<div class="sc reveal"><div class="si">🌱</div><div class="sv" id="stat-impact">24,5 L</div><div class="sl">Tersalurkan</div></div>
 </div>
 <div style="display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap">
 <button class="btn bp" onclick="navigate('setor')">🛢️ Setor Jelantah</button>
 <button class="btn bs" onclick="navigate('reward')">🎁 Lihat Reward</button>
 </div>
 <div class="st"><span>Transaksi Terakhir</span><button onclick="navigate('riwayat')">Lihat Semua</button></div>
-<div id="dash-tx-list"></div>
-<div id="dash-pickup" class="pc">
+<div id="dash-tx-list" class="reveal"></div>
+<div id="dash-pickup" class="pc reveal">
 <h4>🚚 Pickup Berikutnya</h4>
 <div class="pi">
 <span>📅 Senin, 12 Oktober 2026</span>
@@ -304,9 +310,9 @@ Profil
 <h2 class="vs-title">Kenapa Jelantah Perlu Dikelola?</h2>
 <p class="vs-sub">Tiga alasan sederhana kenapa jelantahmu penting.</p>
 <div class="edu-grid">
-<div class="edu-card"><div class="edui">🚫</div><h4>Jangan Buang Sembarangan</h4><p>Pembuangan minyak jelantah secara tidak tepat dapat mencemari lingkungan dan saluran air.</p></div>
-<div class="edu-card"><div class="edui">💰</div><h4>Jelantah Masih Bernilai</h4><p>Minyak jelantah dapat dikumpulkan dan dimanfaatkan sebagai bahan bakar nabati dan produk lainnya.</p></div>
-<div class="edu-card"><div class="edui">♻️</div><h4>Dari Limbah Jadi Manfaat</h4><p>Pengelolaan yang tepat mendukung ekonomi sirkular dan mengurangi pencemaran lingkungan.</p></div>
+<div class="edu-card reveal"><div class="edui">🚫</div><h4>Jangan Buang Sembarangan</h4><p>Pembuangan minyak jelantah secara tidak tepat dapat mencemari lingkungan dan saluran air.</p></div>
+<div class="edu-card reveal"><div class="edui">💰</div><h4>Jelantah Masih Bernilai</h4><p>Minyak jelantah dapat dikumpulkan dan dimanfaatkan sebagai bahan bakar nabati dan produk lainnya.</p></div>
+<div class="edu-card reveal"><div class="edui">♻️</div><h4>Dari Limbah Jadi Manfaat</h4><p>Pengelolaan yang tepat mendukung ekonomi sirkular dan mengurangi pencemaran lingkungan.</p></div>
 </div>
 <div class="tc"><button class="btn ba" onclick="navigate('setor')">Mulai dari 1 Liter</button></div>
 </div>
@@ -314,9 +320,9 @@ Profil
 <h2 class="vs-title">Setiap Liter Berarti.</h2>
 <p class="vs-sub">Kontribusi kecilmu dampaknya besar untuk lingkungan.</p>
 <div class="impact-grid">
-<div class="impact-item"><div class="iv" data-count="24.5">0</div><div class="il">Liter Jelantah Terkumpul</div></div>
-<div class="impact-item"><div class="iv" data-count="6">0</div><div class="il">Transaksi Berhasil</div></div>
-<div class="impact-item"><div class="iv" data-count="2450">0</div><div class="il">Poin Diberikan</div></div>
+<div class="impact-item reveal"><div class="iv" data-count="24.5">0</div><div class="il">Liter Jelantah Terkumpul</div></div>
+<div class="impact-item reveal"><div class="iv" data-count="6">0</div><div class="il">Transaksi Berhasil</div></div>
+<div class="impact-item reveal"><div class="iv" data-count="2450">0</div><div class="il">Poin Diberikan</div></div>
 </div>
 <p style="text-align:center;color:var(--tl);font-size:.88rem;max-width:460px;margin:0 auto">Jelantara membantu menghubungkan masyarakat dengan sistem pengumpulan dan pemanfaatan minyak jelantah.</p>
 </div>
@@ -547,6 +553,7 @@ var pk=S.pickup;if(pk&&pk.date){var d=new Date(pk.date);var days=['Minggu','Seni
 function updateStats(){var o=S.totalOil.toLocaleString('id-ID',{minimumFractionDigits:1})+' L';q('#stat-oil').textContent=o;q('#stat-tx').textContent=S.txCount;q('#stat-pts').textContent=fmtP(S.points);q('#stat-impact').textContent=o;q('#dash-points').textContent=fmtP(S.points);q('#impact-liters').textContent=o}
 function renderProfile(){q('#prof-tx').textContent=S.txCount;q('#prof-oil').textContent=S.totalOil.toLocaleString('id-ID',{minimumFractionDigits:1})+' L';q('#prof-pts').textContent=fmtP(S.points)}
 function animateCounters(){qa('.iv[data-count]').forEach(function(el){var tgt=parseFloat(el.getAttribute('data-count'));var fl=tgt%1!==0;var dur=1200,st=null;function step(ts){if(!st)st=ts;var p=Math.min((ts-st)/dur,1);var e=1-Math.pow(1-p,3);el.textContent=fl?(tgt*e).toFixed(1).replace('.',','):Math.round(tgt*e).toLocaleString('id-ID');if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)})}
+function initReveal(){if(!('IntersectionObserver'in window)){qa('.reveal').forEach(function(el){el.classList.add('visible')});return}var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:0.15});qa('.reveal').forEach(function(el){observer.observe(el)})}
 function updateLiter(v){cL=parseFloat(v)||0;if(cL<0.5)cL=0.5;q('#liter-display').textContent=cL;q('#liter-range').value=cL;q('#liter-input').value=cL;q('#est-pay').textContent=fmt(Math.round(cL*PRICE));q('#est-pts').textContent=fmtP(Math.round(cL*PTSL))}
 window.updateLiter=updateLiter;
 function goStep(n){cS=n;for(var i=1;i<=4;i++){var el=q('#step-'+i);if(el)el.classList.toggle('hidden',i!==n);var pill=q('#pill-'+i);if(pill){pill.classList.remove('active','done');if(i===n)pill.classList.add('active');else if(i<n)pill.classList.add('done')}}
@@ -576,7 +583,7 @@ showModal('\uD83C\uDF81','Konfirmasi Penukaran','Gunakan '+fmtP(rw.points)+' unt
 window.redeemReward=redeemReward;
 function showAbout(){showModal('\uD83E\uDDAE','Tentang Jelantara','"Dari Jelantah, Jadi Manfaat."\n\nJelantara adalah platform digital pengelolaan minyak jelantah yang menghubungkan masyarakat dengan sistem pengumpulan dan pemanfaatan berkelanjutan.\n\nPrototype / Demo Project',null,[{label:'Tutup',cls:'btn bp bsm',action:closeModal}])}
 window.showAbout=showAbout;
-function init(){updateStats();renderDashTx();renderProfile();setTimeout(animateCounters,300)}
+function init(){updateStats();renderDashTx();renderProfile();initReveal();setTimeout(animateCounters,300)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
