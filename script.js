@@ -1,3 +1,8 @@
+// Inisialisasi Supabase
+const supabaseUrl = 'https://epeuumquuxnjxrwkwxux.supabase.co/rest/v1/'; // Ganti dengan URL Supabase Anda
+const supabaseKey = 'sb_publishable_M_PW1owtZFP0Y2lOqGIPMA_peDE848r'; // Ganti dengan anon key Anda
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
 (function(){
 'use strict';
 var PRICE=7000,PTSL=50,DP=2450,DO=24.5,DTX=6;
